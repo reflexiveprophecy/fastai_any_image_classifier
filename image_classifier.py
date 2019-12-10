@@ -56,7 +56,9 @@ def frozen_training(learner, num_of_cycles = 4):
 def tune_learning_rate(learner, start_lr = 1e-5, end_lr = 1e-1):
     learner.unfreeze()
     learner.lr_find(start_lr = start_lr, end_lr = end_lr)
+    #generate a learning rate plot in the folder to manually determine the range of desired learning rates 
     fig = learner.recorder.plot(return_fig = True)
+    #saving the learning rate chart as learning_rate_graph.png
     fig.savefig(data_directory + 'models/' +'learning_rate_graph.png')
     return None
 
@@ -64,6 +66,7 @@ def tune_learning_rate(learner, start_lr = 1e-5, end_lr = 1e-1):
 def unfrozen_training(learner):
     '''transfer learning using resnet34'''
     learner.unfreeze()
+    #please input the desired learning rates based on the learning rate graph generated
     refined_learning_rate = input('please input the selected learning rate min and max, separated by comma, i.e. 3e-5,3e-4: ')
     learning_rate_min, learning_rate_max = [float(x) for x in refined_learning_rate.split(',')]
     learner.fit_one_cycle(6, max_lr=slice(learning_rate_min, learning_rate_max))

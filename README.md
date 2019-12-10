@@ -9,5 +9,6 @@ After git clone the repository, please run the following commands to be able to 
     python3 -m venv venv
     pip install -r requirements.txt
 
-
+Please note that after .lr_find() is run, a learning rate graph will be generated and named as learning_rate_graph.png in the data directory, you would need to manually input the range of desired learning rates based on where losses descend the fastest on the chart, for the following 'unfrozen'
+training process. 
 
